@@ -7,11 +7,12 @@ import urllib
 import requests
 #from usefulFunctions import dubApos
 from discord.ext import commands
+import ffmpeg
 
 URL_SEARCH = "http://radio.garden/api/search?q="
 URL_LISTEN = "https://radio.garden/api/ara/content/listen/"
 
-bot = commands.Bot(command_prefix='`')
+bot = commands.Bot(command_prefix='`',intents=discord.Intents.all())
 
 gResults = []
 
@@ -141,7 +142,7 @@ async def stream_(ctx, *args, channel: discord.VoiceChannel=None):
         except: 
             await ctx.send("Timeout") 
     await ctx.send(f'Connected to: **{channel}** \n playing: ' + args[0], delete_after=20)
-    stop(ctx)
+    ctx.stop(ctx)
     player.play(discord.FFmpegPCMAudio(args[0]))
 
 @bot.command(name="pause")
@@ -159,6 +160,6 @@ async def restartStream(ctx, url: str):
         ctx.voice_client.stop()
     ctx.voice_client.play(discord.FFmpegPCMAudio(url))
         
-bot.run('YOUR_TOKEN_HERE')
+bot.run('MTAyNDU5NjY2NDQ2OTY4ODMzMQ.GMAKks.QA06_xploaKK7eD8X-7LIBAcCbVCIFuXUTO4wk')
 
 
